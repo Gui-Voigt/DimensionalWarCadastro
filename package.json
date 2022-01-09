@@ -1,0 +1,31 @@
+{
+  "name": "dimensionalwarcadastro",
+  "version": "1.0.0",
+  "description": "API de cadastro de fichas de personagem",
+  "main": "index.js",
+
+  "scripts": {
+    "test": ""
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gui-Voigt/DimensionalWarCadastro.git"
+  },
+
+  
+  "bugs": {
+    "url": "https://github.com/Gui-Voigt/DimensionalWarCadastro/issues"
+  },
+
+  "dependencies" : {
+    "express" : "~4.17.2",
+    "body-parser": "~1.19.1",
+    "mongoose" : "~6.1.5",
+    "request" : "~2.88.2"
+  },
+  
+  "author": "Guilherme Voigt",
+  "license": "MIT",
+  "homepage": "https://github.com/Gui-Voigt/DimensionalWarCadastro#readme"
+}
