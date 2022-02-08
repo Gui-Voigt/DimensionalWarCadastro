@@ -7,10 +7,8 @@
  */
 
 // importação das dependências
-var mongoose = require('mongoose');
 
 //criação do Schema
-var Schema = mongoose.Schema;
 
 //Criação do objeto Ficha
 /**
@@ -29,22 +27,3 @@ var Schema = mongoose.Schema;
  *  -> pDef: Number
  *  -> mDef: Number
  */
-
-var FichaSchema = new Schema({
-    //ID já incluso
-    nome: String,
-    origem: String,
-    classe: String,
-    
-    str: Number,
-    wis: Number,
-    dex: Number,
-    spd: Number,
-    con: Number,
-    mana: Number,
-    pDef: Number,
-    mDef: Number
-});
-
-//Exportar o objeto
-module.exports = mongoose.model('Ficha', FichaSchema);

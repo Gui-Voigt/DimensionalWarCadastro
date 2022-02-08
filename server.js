@@ -6,36 +6,22 @@
  *
  */
 
-//Configuração do Setup do app:
-
+//Setup do app
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+const dbconnect = require('./dbconnect');
 
-var Ficha = require('./app/models/ficha');
-const res = require('express/lib/response');
-
-//Conexão com o banco de dados
-    //Ainda não há banco de dados
-
-//Configurar a varpiavel app para usar o 'bodyParser()':
-app.use(bodyParser.urlencoded({ extended: true}));
+//Configurar a variável app para usar o bodyParser():
+app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
 
-//Definir porta onde a API será execeutada:
+//Definir porta da aplicação
 var port = process.env.port || 8000;
 
-//Definir rotas via Express
-var router = express.Router();
-
-router.get('/', function(req, res) {
-    res.json({"message" : "Rota Criada"})
-});
-
-//Definir padrão de prefiso das rotas:
-app.use('/api', router);
-
-//Iniciar a aplicação (servidor):
+//Iniciar a aplicação(Server)
 app.listen(port);
-console.log("INICIANDO A APP NA PORTA " + port);
+console.log("inciando a app na porta " + port);   
+
+//Iniciando banco de dados
+dbconnect();
