@@ -7,8 +7,7 @@
  */
 
 // importação das dependências
-
-//criação do Schema
+const mongoose = require('mongoose')
 
 //Criação do objeto Ficha
 /**
@@ -23,7 +22,27 @@
  *  -> dex: Number      //Destreza, ações por turno e habilidade com armas
  *  -> spd: Number      //Velocidade, ordem de ataque, fuga ou esquiva
  *  -> con: Number      //Constuição, Fatal Bônus
- *  -> mana: Number
- *  -> pDef: Number
- *  -> mDef: Number
+ *  -> mana: Number     //Recurso para cast de skills
+ *  -> pDef: Number     //Defesa física
+ *  -> mDef: Number     //Defesa mágica
  */
+
+const Ficha = mongoose.model('Ficha', {
+    nome : String,
+    origem : String,
+    classe: String,
+
+    
+    str : Number,
+    wis : Number,
+    dex : Number,
+    spd : Number,
+    con : Number,
+    mana : Number,
+    pDef : Number,
+    mDef : Number,
+})
+
+
+//exportar objeto
+module.exports = Ficha;

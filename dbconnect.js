@@ -1,18 +1,23 @@
-//Biblitecas de Setup
-var mongoose = require("mongoose");
-    mongoose.Promise = global.Promise;
+//Setup
+const mongoose = require("mongoose");
+const logins = require("./logins");
+const DBUSER = logins.DBUSER;
+const DBPASS = logins.DBPASS;
 
-//Conectando ao banco de dados:
-var uri = "mongodb://localhost/DW";
-var options = {
+
+//const uri = `mongodb+srv://API-access:qms8vg74@cluster0.g3y4t.mongodb.net/APIDB?retryWrites=true&w=majority`
+const uri = `mongodb+srv://${DBUSER}:${DBPASS}@cluster0.g3y4t.mongodb.net/APIDB?retryWrites=true&w=majority`
+const configs = {
     useNewUrlParser: true,
     useUnifiedTopology: true
-};
+}
 
-module.exports = function (){
-    mongoose.connect(uri, options);
-
+module.exports = () => mongoose.connect(uri, configs)
     const db = mongoose.connection;
     db.on("error", (error) => console.error(error));
-    db.once("open", () => console.log("Conectado ao banco de dados"));
-}
+    db.once("open", () => console.log("Conectado ao banco de dados"))
+    
+    
+
+
+
