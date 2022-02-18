@@ -5,7 +5,6 @@ const DBUSER = logins.DBUSER;
 const DBPASS = logins.DBPASS;
 
 
-//const uri = `mongodb+srv://API-access:qms8vg74@cluster0.g3y4t.mongodb.net/APIDB?retryWrites=true&w=majority`
 const uri = `mongodb+srv://${DBUSER}:${DBPASS}@cluster0.g3y4t.mongodb.net/APIDB?retryWrites=true&w=majority`
 const configs = {
     useNewUrlParser: true,
