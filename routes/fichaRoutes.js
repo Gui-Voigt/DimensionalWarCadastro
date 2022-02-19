@@ -6,7 +6,7 @@ const Ficha = require('../models/Ficha');
 router.post('/', async (req, res) => {
     //Receber dados de body descontruindo-os
     
-    var {nome, origem, classe, str, wis, dex, spd, con, mana, pDef, mDef} = req.body
+    const {nome, origem, classe, str, wis, dex, spd, con, mana, pDef, mDef} = req.body
     //Criar objeto "Ficha" com os parâmetros desconstruídos
     
     const ficha = {
@@ -119,37 +119,34 @@ router.get('/:id', async (req,res) => {
 
 //Atualização de dados (PUT e PATCH)
     //Patch faz atualização parcial dos dados
+
 router.patch('/:id', async (req,res) => {
 
     const id = req.params.id
     const {nome, origem, classe, str, wis, dex, spd, con, mana, pDef, mDef} = req.body
-
-    var ficha = {
-        nome, origem, classe, str, wis, dex, spd, con, mana, pDef, mDef
-    }
-
+    var ficha = { nome, origem, classe, str, wis, dex, spd, con, mana, pDef, mDef }
     try{
 
-        const fichaUpdate = await Ficha.updateOne({ _id : id}, ficha)
-
+        var fichaUpdate = await Ficha.updateOne({_id : id} , ficha)
+        
         if (fichaUpdate.modifiedCount === 0) {
-            res.status(422).json({ message : "Nenhuma ficha encontrada para atualização"})
+            res.status(422).json("A ficha não pôde ser atualizada")
             return
         }
 
-        ficha = await Ficha.findOne({ _id : id})
-        res.status(200).json(ficha)
+        var fichaUpdated = await Ficha.findOne({_id : id})
+        res.status(500).json({message : "Ficha atualizada" , fichaUpdated})
         return
-        
 
     } catch (err) {
-
-        res.status(500).json({ error : err, message : "Erro ao atualizar ficha"})
+        res.status(500).json({
+            error : err,
+            message : "Não foi possível atualizar a ficha"
+        })
         return
-
     }
-    
 })
+
 
 //Exportar Rota
 module.exports = router;
