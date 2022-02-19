@@ -5,49 +5,51 @@ const Ficha = require('../models/Ficha');
 //Rota POST - Criação de Ficha
 router.post('/', async (req, res) => {
     //Receber dados de body descontruindo-os
+    
     var {nome, origem, classe, str, wis, dex, spd, con, mana, pDef, mDef} = req.body
- 
-    //Teste de preenchimento e valores padrão -> Verificar alternativa do MongoDB ou Mongoose para valores padrão
-    if (!nome) {
-        res.json({message:"Nome obrigatório"})
-    }
-    if (!origem) {
-        res.json({message:"Origem obrigatória"})
-    }
-    if (!classe) {
-        res.json({message:"Classe obrigatória"})
-    }
-    
-    if (!str) {
-        str = 0
-    }
-    if (!wis) {
-        wis = 0
-    }
-    if (!dex) {
-        dex = 0
-    }
-    if (!spd) {
-        spd = 0
-    }
-    if (!con) {
-        con = 0
-    }
-    if (!mana) {
-        mana = 0
-    }
-    if (!pDef) {
-        pDef = 0
-    }
-    if (!mDef) {
-        mDef = 0
-    }
-    
     //Criar objeto "Ficha" com os parâmetros desconstruídos
+    
     const ficha = {
         nome, origem, classe, str, wis, dex, spd, con, mana, pDef, mDef
     }
 
+    //Teste de preenchimento e valores padrão -> Verificar alternativa do MongoDB ou Mongoose para valores padrão
+
+    if (!ficha.nome) {
+        res.json({message:"Nome obrigatório"})
+    }
+    if (!ficha.origem) {
+        res.json({message:"Origem obrigatória"})
+    }
+    if (!ficha.classe) {
+        res.json({message:"Classe obrigatória"})
+    }
+
+    if (!ficha.str) {
+        ficha.str = 0
+    }
+    if (!ficha.wis) {
+        ficha.wis = 0
+    }
+    if (!ficha.dex) {
+        ficha.dex = 0
+    }
+    if (!ficha.spd) {
+        ficha.spd = 0
+    }
+    if (!ficha.con) {
+        ficha.con = 0
+    }
+    if (!ficha.mana) {
+        ficha.mana = 0
+    }
+    if (!ficha.pDef) {
+        ficha.pDef = 0
+    }
+    if (!ficha.mDef) {
+        ficha.mDef = 0
+    }
+    
     //Salva o objeto como elemento no banco de dados
     try{
 
@@ -64,6 +66,8 @@ router.post('/', async (req, res) => {
         return
   
     }
+
+    
 })
 
 // Rota Get - 
@@ -71,50 +75,45 @@ router.post('/', async (req, res) => {
     //Leitura geral de dados
 router.get('/', async (req,res) => {
 
-    const fichas = await Ficha.find()
-
     try{
 
+        const fichas = await Ficha.find()
         res.status(200).json(fichas)
-
-    } catch (err) {
-
-        res.status(500).json({
-            error : err,
-            message : "Falha ao carregar fichas"
-        })
         return
 
+    } catch (err) {
+        res.status(500).json({
+            error : err,
+            message : "Erro ao carregar fichas"
+        })
+        return
     }
-
 })
 
     //Leitura por ID
-router.get('/:id', async (req, res) => {
-
+router.get('/:id', async (req,res) => {
     const id = req.params.id
 
     try{
 
         const ficha = await Ficha.findOne({ _id : id })
-
-        if (!ficha) {
-            res.status(422).json({ message : "Ficha não encontrada "})
+        
+        if(!ficha){
+            res.status(422).json({ message : "Ficha não encontrada"})
             return
         }
-        
+
         res.status(200).json(ficha)
         return
 
     } catch (err) {
-
         res.status(500).json({
-            error : err,
-            message : "Erro ao carregar a ficha"
+            error: err,
+            message : "Erro ao carregar Ficha"
         })
         return
-
     }
+
 
 })
 
