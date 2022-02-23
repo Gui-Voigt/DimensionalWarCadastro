@@ -147,6 +147,29 @@ router.patch('/:id', async (req,res) => {
     }
 })
 
+//Excluir cadastro (Rota Delete)
+router.delete('/:id', async (req, res) => {
+
+    const id = req.params.id
+    const ficha = Ficha.findOne({_id : id})
+
+    if (!ficha) {
+        res.status(422).json("Ficha não econtrada")
+        return
+    }
+
+    try{
+
+        await Ficha.deleteOne({_id : id})
+        res.status(200).json("Ficha removida com sucesso")
+
+    } catch (err) {
+        res.status(500).json({
+            error : err,
+            message : "Não foi possível excluir a ficha"
+        })
+    }
+})
 
 //Exportar Rota
 module.exports = router;
